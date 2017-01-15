@@ -151,12 +151,18 @@ namespace BrighterDayBouquet.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CategoryID");
+
                     b.Property<string>("MainImage")
                         .IsRequired();
 
+                    b.Property<string>("MainImageAltText")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 64);
+
                     b.Property<string>("ProductCode")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 8);
+                        .HasAnnotation("MaxLength", 10);
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -166,13 +172,29 @@ namespace BrighterDayBouquet.Data.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 128);
 
-                    b.Property<byte>("Rating");
+                    b.Property<byte?>("Rating");
 
                     b.Property<double>("UnitPrice");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BrighterDayBouquet.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 32);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("BrighterDayBouquet.Models.ProductImage", b =>
@@ -390,10 +412,18 @@ namespace BrighterDayBouquet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("BrighterDayBouquet.Models.Product", b =>
+                {
+                    b.HasOne("BrighterDayBouquet.Models.ProductCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("BrighterDayBouquet.Models.ProductImage", b =>
                 {
                     b.HasOne("BrighterDayBouquet.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Images")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

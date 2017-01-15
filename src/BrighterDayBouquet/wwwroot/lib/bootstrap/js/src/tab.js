@@ -3,7 +3,7 @@ import Util from './util'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.5): tab.js
+ * Bootstrap (v4.0.0-alpha.6): tab.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -18,7 +18,7 @@ const Tab = (($) => {
    */
 
   const NAME                = 'tab'
-  const VERSION             = '4.0.0-alpha.5'
+  const VERSION             = '4.0.0-alpha.6'
   const DATA_KEY            = 'bs.tab'
   const EVENT_KEY           = `.${DATA_KEY}`
   const DATA_API_KEY        = '.data-api'
@@ -36,15 +36,16 @@ const Tab = (($) => {
   const ClassName = {
     DROPDOWN_MENU : 'dropdown-menu',
     ACTIVE        : 'active',
+    DISABLED      : 'disabled',
     FADE          : 'fade',
-    IN            : 'in'
+    SHOW          : 'show'
   }
 
   const Selector = {
     A                     : 'a',
     LI                    : 'li',
     DROPDOWN              : '.dropdown',
-    LIST                  : 'ul:not(.dropdown-menu), ol:not(.dropdown-menu)',
+    LIST                  : 'ul:not(.dropdown-menu), ol:not(.dropdown-menu), nav:not(.dropdown-menu)',
     FADE_CHILD            : '> .nav-item .fade, > .fade',
     ACTIVE                : '.active',
     ACTIVE_CHILD          : '> .nav-item > .active, > .active',
@@ -79,7 +80,8 @@ const Tab = (($) => {
     show() {
       if (this._element.parentNode &&
           this._element.parentNode.nodeType === Node.ELEMENT_NODE &&
-          $(this._element).hasClass(ClassName.ACTIVE)) {
+          $(this._element).hasClass(ClassName.ACTIVE) ||
+          $(this._element).hasClass(ClassName.DISABLED)) {
         return
       }
 
@@ -173,7 +175,7 @@ const Tab = (($) => {
       }
 
       if (active) {
-        $(active).removeClass(ClassName.IN)
+        $(active).removeClass(ClassName.SHOW)
       }
     }
 
@@ -197,7 +199,7 @@ const Tab = (($) => {
 
       if (isTransitioning) {
         Util.reflow(element)
-        $(element).addClass(ClassName.IN)
+        $(element).addClass(ClassName.SHOW)
       } else {
         $(element).removeClass(ClassName.FADE)
       }

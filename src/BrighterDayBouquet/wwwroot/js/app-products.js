@@ -17,7 +17,7 @@
             $routeProvider.when("product/:productCode", {
                 controller: "productsController",
                 controllerAs: "vm",
-                templateUrl: "/views/productsView.html"
+                templateUrl: "/views/productView.html"
             });
         });
 

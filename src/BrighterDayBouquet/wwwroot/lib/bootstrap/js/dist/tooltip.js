@@ -6,7 +6,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.5): tooltip.js
+ * Bootstrap (v4.0.0-alpha.6): tooltip.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -17,7 +17,7 @@ var Tooltip = function ($) {
    * Check for Tether dependency
    * Tether - http://tether.io/
    */
-  if (window.Tether === undefined) {
+  if (typeof Tether === 'undefined') {
     throw new Error('Bootstrap tooltips require Tether (http://tether.io/)');
   }
 
@@ -28,7 +28,7 @@ var Tooltip = function ($) {
    */
 
   var NAME = 'tooltip';
-  var VERSION = '4.0.0-alpha.5';
+  var VERSION = '4.0.0-alpha.6';
   var DATA_KEY = 'bs.tooltip';
   var EVENT_KEY = '.' + DATA_KEY;
   var JQUERY_NO_CONFLICT = $.fn[NAME];
@@ -71,7 +71,7 @@ var Tooltip = function ($) {
   };
 
   var HoverState = {
-    ACTIVE: 'active',
+    SHOW: 'show',
     OUT: 'out'
   };
 
@@ -90,7 +90,7 @@ var Tooltip = function ($) {
 
   var ClassName = {
     FADE: 'fade',
-    ACTIVE: 'active'
+    SHOW: 'show'
   };
 
   var Selector = {
@@ -171,7 +171,7 @@ var Tooltip = function ($) {
         }
       } else {
 
-        if ($(this.getTipElement()).hasClass(ClassName.ACTIVE)) {
+        if ($(this.getTipElement()).hasClass(ClassName.SHOW)) {
           this._leave(null, this);
           return;
         }
@@ -261,7 +261,7 @@ var Tooltip = function ($) {
         Util.reflow(tip);
         this._tether.position();
 
-        $(tip).addClass(ClassName.ACTIVE);
+        $(tip).addClass(ClassName.SHOW);
 
         var complete = function complete() {
           var prevHoverState = _this._hoverState;
@@ -294,7 +294,7 @@ var Tooltip = function ($) {
         throw new Error('Tooltip is transitioning');
       }
       var complete = function complete() {
-        if (_this2._hoverState !== HoverState.ACTIVE && tip.parentNode) {
+        if (_this2._hoverState !== HoverState.SHOW && tip.parentNode) {
           tip.parentNode.removeChild(tip);
         }
 
@@ -314,7 +314,11 @@ var Tooltip = function ($) {
         return;
       }
 
-      $(tip).removeClass(ClassName.ACTIVE);
+      $(tip).removeClass(ClassName.SHOW);
+
+      this._activeTrigger[Trigger.CLICK] = false;
+      this._activeTrigger[Trigger.FOCUS] = false;
+      this._activeTrigger[Trigger.HOVER] = false;
 
       if (Util.supportsTransitionEnd() && $(this.tip).hasClass(ClassName.FADE)) {
         this._isTransitioning = true;
@@ -341,7 +345,7 @@ var Tooltip = function ($) {
 
       this.setElementContent($tip.find(Selector.TOOLTIP_INNER), this.getTitle());
 
-      $tip.removeClass(ClassName.FADE + ' ' + ClassName.ACTIVE);
+      $tip.removeClass(ClassName.FADE + ' ' + ClassName.SHOW);
 
       this.cleanupTether();
     };
@@ -442,14 +446,14 @@ var Tooltip = function ($) {
         context._activeTrigger[event.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
       }
 
-      if ($(context.getTipElement()).hasClass(ClassName.ACTIVE) || context._hoverState === HoverState.ACTIVE) {
-        context._hoverState = HoverState.ACTIVE;
+      if ($(context.getTipElement()).hasClass(ClassName.SHOW) || context._hoverState === HoverState.SHOW) {
+        context._hoverState = HoverState.SHOW;
         return;
       }
 
       clearTimeout(context._timeout);
 
-      context._hoverState = HoverState.ACTIVE;
+      context._hoverState = HoverState.SHOW;
 
       if (!context.config.delay || !context.config.delay.show) {
         context.show();
@@ -457,7 +461,7 @@ var Tooltip = function ($) {
       }
 
       context._timeout = setTimeout(function () {
-        if (context._hoverState === HoverState.ACTIVE) {
+        if (context._hoverState === HoverState.SHOW) {
           context.show();
         }
       }, context.config.delay.show);

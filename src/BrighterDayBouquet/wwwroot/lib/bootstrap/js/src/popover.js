@@ -3,7 +3,7 @@ import Tooltip from './tooltip'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.5): popover.js
+ * Bootstrap (v4.0.0-alpha.6): popover.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -18,7 +18,7 @@ const Popover = (($) => {
    */
 
   const NAME                = 'popover'
-  const VERSION             = '4.0.0-alpha.5'
+  const VERSION             = '4.0.0-alpha.6'
   const DATA_KEY            = 'bs.popover'
   const EVENT_KEY           = `.${DATA_KEY}`
   const JQUERY_NO_CONFLICT  = $.fn[NAME]
@@ -37,8 +37,8 @@ const Popover = (($) => {
   })
 
   const ClassName = {
-    FADE   : 'fade',
-    ACTIVE : 'active'
+    FADE : 'fade',
+    SHOW : 'show'
   }
 
   const Selector = {
@@ -117,7 +117,7 @@ const Popover = (($) => {
       this.setElementContent($tip.find(Selector.TITLE), this.getTitle())
       this.setElementContent($tip.find(Selector.CONTENT), this._getContent())
 
-      $tip.removeClass(`${ClassName.FADE} ${ClassName.ACTIVE}`)
+      $tip.removeClass(`${ClassName.FADE} ${ClassName.SHOW}`)
 
       this.cleanupTether()
     }

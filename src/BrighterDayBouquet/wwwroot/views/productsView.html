@@ -1,0 +1,12 @@
+﻿<div style="display: flex; justify-content:center;  width: 88%; background-color: #cbacba;">
+    <div class="text-danger" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
+    <wait-cursor display-when="vm.isBusy"></wait-cursor>
+    
+    <div style="width: 200px; height: 200px; margin:10px;" ng-repeat="product in vm.products">
+        <img src="{{product.mainImage}}" alt="{{product.maimImageAltText}}" style="width: 100px; height:100px;" />
+        <br />
+        <span>{{product.productName}}</span>
+        <p>{{product.productDescription | limitTo:descriptionLimit}}</p>
+    </div>
+    
+</div>

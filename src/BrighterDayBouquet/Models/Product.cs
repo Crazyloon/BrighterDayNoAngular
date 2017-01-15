@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,11 @@ namespace BrighterDayBouquet.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(8)]
+        [ForeignKey("Category")]
+        public int CategoryID { get; set; }
+
+        [Required]
+        [StringLength(10)]
         public string ProductCode { get; set; }
 
         [Required]
@@ -41,9 +46,17 @@ namespace BrighterDayBouquet.Models
         [DataType(DataType.ImageUrl)]
         public string MainImage { get; set; }
 
+        [Required]
+        [StringLength(64)]
+        public string MainImageAltText { get; set; }
+
+        // Raiting will eventually come from a query on user reviews for each product. Raitings will be updated once per day.
         [Range(1,5)]
-        public byte Rating { get; set; } // 1-5 stars (nullable? when null say "be the first to rate"?)
+        public byte? Rating { get; set; } // 1-5 stars (When null say "be the first to rate")
 
 
+        // Navigation
+        public virtual ICollection<ProductImage> Images { get; set; }
+        public virtual ProductCategory Category { get; set; }
     }
 }

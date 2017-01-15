@@ -25,6 +25,6 @@ namespace BrighterDayBouquet.Models
         public int CartID { get; set; }
 
         //Navigation Properties
-        public ShoppingCart ShoppingCart { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }

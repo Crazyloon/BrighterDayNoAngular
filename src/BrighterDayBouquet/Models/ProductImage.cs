@@ -15,7 +15,7 @@ namespace BrighterDayBouquet.Models
     /// Author: Russell Dow.
     /// Created: 1/3/17
     /// Purpose: This class will model an image that is related to 
-    ///             a product
+    ///             a product. Each product can contain multiple images
     /// </remarks>
     public class ProductImage
     {
@@ -41,6 +41,7 @@ namespace BrighterDayBouquet.Models
         [DataType(DataType.ImageUrl)]
         public string ImageURL { get; set; }
 
+        // Navigation
         public virtual Product Product { get; set; }
     }
 }

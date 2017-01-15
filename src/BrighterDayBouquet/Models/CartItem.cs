@@ -22,6 +22,7 @@ namespace BrighterDayBouquet.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [ForeignKey("ShoppingCart")]
         public int CartID { get; set; }
 
@@ -40,8 +41,8 @@ namespace BrighterDayBouquet.Models
         public bool isCheckedOut { get; set; }
 
         //Navigation Properties
-        public ShoppingCart ShoppingCart { get; set; }
-        public Product Product { get; set; }
-        public PackageStyle PackageStyle { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual PackageStyle PackageStyle { get; set; }
     }
 }

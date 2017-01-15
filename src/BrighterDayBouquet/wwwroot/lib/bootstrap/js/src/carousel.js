@@ -3,7 +3,7 @@ import Util from './util'
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.5): carousel.js
+ * Bootstrap (v4.0.0-alpha.6): carousel.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -18,7 +18,7 @@ const Carousel = (($) => {
    */
 
   const NAME                = 'carousel'
-  const VERSION             = '4.0.0-alpha.5'
+  const VERSION             = '4.0.0-alpha.6'
   const DATA_KEY            = 'bs.carousel'
   const EVENT_KEY           = `.${DATA_KEY}`
   const DATA_API_KEY        = '.data-api'
@@ -241,13 +241,14 @@ const Carousel = (($) => {
       if (/input|textarea/i.test(event.target.tagName)) {
         return
       }
-      event.preventDefault()
 
       switch (event.which) {
         case ARROW_LEFT_KEYCODE:
+          event.preventDefault()
           this.prev()
           break
         case ARROW_RIGHT_KEYCODE:
+          event.preventDefault()
           this.next()
           break
         default:

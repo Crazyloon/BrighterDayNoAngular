@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BrighterDayBouquet.Controllers.Web
 {
-    public class AppController : Controller
+    public class ProductsController : Controller
     {
-        public AppController()
+        public ProductsController()
         {
 
         }
@@ -19,7 +19,7 @@ namespace BrighterDayBouquet.Controllers.Web
             return View();
         }
 
-        public IActionResult Products()
+        public IActionResult Browse()
         {
             // The Products View will be generated through Angular
             // see wwwroot/js/productsController.js

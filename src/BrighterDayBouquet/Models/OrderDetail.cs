@@ -40,6 +40,6 @@ namespace BrighterDayBouquet.Models
         public string SpecialRequest { get; set; }
 
         // Navigation Properties
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

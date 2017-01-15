@@ -26,6 +26,7 @@ namespace BrighterDayBouquet.Models
             {
                 var user = new ApplicationUser();
                 user.Email = "rdow@brighterday.com";
+                user.UserName = user.Email;
                 user.FirstName = "Russell";
                 user.LastName = "Dow";
 
@@ -33,10 +34,48 @@ namespace BrighterDayBouquet.Models
 
                 var user2 = new ApplicationUser();
                 user2.Email = "yuliazhuk@brighterday.com";
+                user2.UserName = user2.Email;
                 user2.FirstName = "Yulia";
                 user2.LastName = "Zhuk";
 
                 await _userManager.CreateAsync(user2, "Password11!");
+            }
+
+            // Create product categories
+            if (!_context.ProductCategories.Any())
+            {
+                ProductCategory birthday = new ProductCategory();
+                birthday.CategoryName = "Birthday";
+
+                _context.ProductCategories.Add(birthday);
+
+                ProductCategory justBecause = new ProductCategory();
+                justBecause.CategoryName = "Just Because";
+
+                _context.ProductCategories.Add(justBecause);
+
+                ProductCategory party = new ProductCategory();
+                party.CategoryName = "Party";
+
+                _context.ProductCategories.Add(party);
+
+                ProductCategory romantic = new ProductCategory();
+                romantic.CategoryName = "Romantic";
+
+                _context.ProductCategories.Add(romantic);
+
+                ProductCategory sympathy = new ProductCategory();
+                sympathy.CategoryName = "Sympathy";
+
+                _context.ProductCategories.Add(sympathy);
+
+                ProductCategory wedding = new ProductCategory();
+                wedding.CategoryName = "Wedding";
+
+                _context.ProductCategories.Add(wedding);
+
+
+                _context.SaveChanges();
             }
 
             // Create Products if they're not in the DB yet
@@ -44,17 +83,22 @@ namespace BrighterDayBouquet.Models
             {
                 Product pinkExpression = new Product();
                 pinkExpression.ProductName = "Pink Expressions";
-                
-                pinkExpression.MainImage = "~/images/pinkexpression.jpg";
+                pinkExpression.ProductCode = "1701AAAA24";
+                pinkExpression.CategoryID = 1;
+                pinkExpression.MainImage = "images/pinkexpression.jpg";
+                pinkExpression.MainImageAltText = "A delicate mix of roses.";
                 pinkExpression.ProductDescription = "A delicate mix of roses, lilies and carnations in various shades of pink.";
                 pinkExpression.UnitPrice = 40.00d;
-                pinkExpression.Rating = 4;
+                pinkExpression.Rating = 4; // Raiting will eventually come from a query on user reviews for each product. Raitings will be updated once per day.
 
                 _context.Products.Add(pinkExpression);
 
                 Product redBloom = new Product();
                 redBloom.ProductName = "Red Bloom";
-                redBloom.MainImage = "~/images/redbloom.jpg";
+                redBloom.ProductCode = "1701AAAB24";
+                redBloom.CategoryID = 4;
+                redBloom.MainImage = "images/redbloom.jpg";
+                redBloom.MainImageAltText = "Two dozen red roses.";
                 redBloom.ProductDescription = "Two dozen brilliant, sweet scented red roses to brighten your day.";
                 redBloom.UnitPrice = 45.00d;
                 redBloom.Rating = 5;
@@ -63,12 +107,27 @@ namespace BrighterDayBouquet.Models
 
                 Product multiColor = new Product();
                 multiColor.ProductName = "Expression of colors";
-                multiColor.MainImage = "~/images/multicolor.jpg";
+                multiColor.ProductCode = "1701AAAC24";
+                multiColor.CategoryID = 3;
+                multiColor.MainImage = "images/multicolor.jpg";
+                multiColor.MainImageAltText = "Two dozen multi-colored roses.";
                 multiColor.ProductDescription = "Two dozen bright multi-colored roses. Shades of red green and blue fused together to provide an unimaginable beauty.";
                 multiColor.UnitPrice = 65.00d;
                 multiColor.Rating = 5;
 
                 _context.Products.Add(multiColor);
+
+                Product smile = new Product();
+                smile.ProductName = "Sending Smiles";
+                smile.ProductCode = "1701AAAD24";
+                smile.CategoryID = 2;
+                smile.MainImage = "images/sendingsmiles.jpg";
+                smile.MainImageAltText = "Friendly colors mix.";
+                smile.ProductDescription = "Friendly colors, bursting with happieness. A brilliant bouquet in a cute mug that is sure to make someone smile!";
+                smile.UnitPrice = 45.00d;
+                smile.Rating = 4;
+
+                _context.Products.Add(smile);
 
                 _context.SaveChanges();
             }
@@ -123,7 +182,7 @@ namespace BrighterDayBouquet.Models
                 CartItem ci = new CartItem();
                 ci.CartID = 1;
                 ci.PackageStyleID = 1;
-                ci.ProductID = 1;
+                ci.ProductID = 5;
                 ci.Quantity = 2;
                 ci.isCheckedOut = false;
 
@@ -132,7 +191,7 @@ namespace BrighterDayBouquet.Models
                 CartItem ci2 = new CartItem();
                 ci2.CartID = 1;
                 ci2.PackageStyleID = 2;
-                ci2.ProductID = 1;
+                ci2.ProductID = 5;
                 ci2.Quantity = 2;
                 ci2.isCheckedOut = false;
 

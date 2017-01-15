@@ -1,0 +1,21 @@
+@model BrighterDayBouquet.ViewModels.Api.ProductViewModel
+
+@{
+    ViewData["Title"] = "Browse Products";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script src="~/js/simpleControls.js"></script>
+    <script src="~/js/app-products.js"></script>
+    <script src="~/js/productsController.js"></script>
+}
+
+
+<div class="row" ng-app="app-products">
+
+    <div ng-view></div>
+
+</div>
