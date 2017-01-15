@@ -10,7 +10,7 @@ This is an e-commerce website for selling flowers to local customers (no deliver
     
 ### Frontend:
   * Angular 1.x
-  * Bootstrap 3.x
+  * Bootstrap 4.0.0-alpha.6
   * JQuery 3.x
     * JQuery-Validation
   * Font Awesome 4.x
