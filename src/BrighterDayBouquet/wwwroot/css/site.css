@@ -48,3 +48,16 @@ textarea {
     display: none
   }
 }
+
+.item-shadow{
+    box-shadow: 0 0 8px #b62474;
+}
+
+.card-text-height-norm{
+    min-height: 72px;
+}
+
+.product-img-thumb{
+    width: 244px;
+    height: 266px;
+}

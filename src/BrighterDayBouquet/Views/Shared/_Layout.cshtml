@@ -6,38 +6,42 @@
     <base href="/" /> @*This is the base root of the web site '/' equates to 'wwwroot/' thought the 'wwwroot' literal is not seen on the page*@
     <title>@ViewData["Title"] - BrighterDayBouquet</title>
 
+    @RenderSection("Style", required: false)
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css"/>
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     @*<environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" // WRONG VERSION - Using 4.0.0-alpha.6
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>*@
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" // WRONG VERSION - Using 4.0.0-alpha.6
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
 </head>
 <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Brighter Day Bouquet</a>
+
+        <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BrighterDayBouquet</a>
 
-        <div class="collapse navbar-collapse">
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+            @*<form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                <button class="btn btn-outline-success mr-sm-2" type="submit">Search</button>
+            </form>*@
             @await Html.PartialAsync("_LoginPartial")
         </div>
     </nav>
-    
+
     <div class="container body-content">
         @RenderBody()
         <hr />

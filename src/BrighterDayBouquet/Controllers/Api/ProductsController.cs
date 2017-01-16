@@ -16,9 +16,10 @@ namespace BrighterDayBouquet.Controllers.Api
     public class ProductsController : Controller
     {
         private ILogger<ProductsController> _logger;
-        private IRepository<Product> _productsRepo;
+        //private IRepository<Product> _productsRepo; IRepository<Product> productsRepo
+        private ProductRepository _productsRepo;
 
-        public ProductsController(IRepository<Product> productsRepo, ILogger<ProductsController> logger)
+        public ProductsController(ProductRepository productsRepo, ILogger<ProductsController> logger)
         {
             _productsRepo = productsRepo;
             _logger = logger;
@@ -37,9 +38,26 @@ namespace BrighterDayBouquet.Controllers.Api
                 // In most cases, we're going to want to log errors as well as let users know
                 // if they have done something wrong, and how they can avoid doing so in the future
                 _logger.LogError($"Failed to get products from the database: {ex}");
-
-                return BadRequest("Error Occured");
             }
+
+            return BadRequest("Error Occured");
+        }
+
+        [HttpGet]
+        [Route("/api/products/{productCode}")]
+        public IActionResult Get(string productCode)
+        {
+            try
+            {
+                var product = _productsRepo.GetByProductCode(productCode);
+                return Ok(Mapper.Map<ProductViewModel>(product));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to find specified product. CODE: {productCode} Details: {ex}");
+            }
+
+            return BadRequest();
         }
 
         [HttpPost("")]
@@ -52,7 +70,7 @@ namespace BrighterDayBouquet.Controllers.Api
                 // Protect Post so only store owners can access it
                 // Actually add products to the database.
                 var newProduct = Mapper.Map<Product>(product);
-                return Created($"api/products/{product.ProductName}", Mapper.Map<ProductViewModel>(newProduct));
+                return Created($"api/products/{product.ProductCode}", Mapper.Map<ProductViewModel>(newProduct));
             }
 
             return BadRequest("Bad Data");

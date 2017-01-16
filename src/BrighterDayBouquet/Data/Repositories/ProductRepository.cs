@@ -17,5 +17,10 @@ namespace BrighterDayBouquet.Data.Repositories
         {
             return currentContext.Products.SingleOrDefault(p => p.Id == id);
         }
+
+        public Product GetByProductCode(string productCode)
+        {
+            return currentContext.Products.SingleOrDefault(p => p.ProductCode == productCode);
+        }
     }
 }

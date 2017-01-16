@@ -10,6 +10,9 @@ namespace BrighterDayBouquet.ViewModels.Api
     public class ProductViewModel
     {
         [Required]
+        public int CategoryID { get; set; }
+
+        [Required]
         [StringLength(8)]
         public string ProductCode { get; set; }
 
@@ -23,11 +26,15 @@ namespace BrighterDayBouquet.ViewModels.Api
 
         [Required]
         [DataType(DataType.Currency)]
-        public double UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
 
         [Required]
         [DataType(DataType.ImageUrl)]
         public string MainImage { get; set; }
+
+        [Required]
+        [StringLength(64)]
+        public string MainImageAltText { get; set; }
 
         [Range(1, 5)]
         public byte Rating { get; set; } // 1-5 stars (nullable? when null say "be the first to rate"?)

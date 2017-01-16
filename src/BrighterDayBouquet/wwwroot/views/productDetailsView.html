@@ -1,0 +1,18 @@
+﻿<!--Wait Cursor-->
+<div class="text-danger pt-3" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
+<div class="pt-3"><wait-cursor display-when="vm.isBusy"></wait-cursor></div>
+<!--Wait Cursor-->
+<!-- Product Details-->
+<div class="d-flex justify-content-around align-content-stretch flex-wrap mt-2">
+    <div class="d-block m-2 p-2 item-shadow" style="max-width:340px; ">
+        <h2 class="text-center">{{vm.product.productName}}</h2>
+        <img class="img-thumbnail product-img-thumb mx-auto d-block" src="{{vm.product.mainImage}}" alt="{{vm.product.mainImageAltText}}" />
+        <p class="text-center">{{vm.product.unitPrice | currency}}</p>
+        <p class="card-text text-center card-text-height-norm">{{vm.product.productDescription | limitTo:vm.descriptionLimit}}{{vm.product.productDescription.length > vm.descriptionLimit ? '&hellip;' : ''}}</p>
+        <p class="text-center mt-auto">
+            <a class="btn btn-success mt-sm-2" href="#" role="button">Add To Cart <i class="fa fa-shopping-cart"></i></a>
+            <a class="btn btn-outline-primary mt-sm-2" href="#" role="button">Details &raquo;</a>
+        </p>
+    </div>
+</div>
+<!-- Product Details -->

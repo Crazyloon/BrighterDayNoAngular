@@ -40,7 +40,7 @@ namespace BrighterDayBouquet.Models
 
         [Required]
         [DataType(DataType.Currency)]
-        public double UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
 
         [Required]
         [DataType(DataType.ImageUrl)]

@@ -12,13 +12,6 @@
                 controllerAs: "vm",
                 templateUrl: "/views/productsView.html"
             });
-
-            // A route for a specific product, viewed by it's product code (Product.ProductCode)
-            $routeProvider.when("product/:productCode", {
-                controller: "productsController",
-                controllerAs: "vm",
-                templateUrl: "/views/productView.html"
-            });
         });
 
 })();

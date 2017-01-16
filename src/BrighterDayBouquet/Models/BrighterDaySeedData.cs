@@ -88,7 +88,7 @@ namespace BrighterDayBouquet.Models
                 pinkExpression.MainImage = "images/pinkexpression.jpg";
                 pinkExpression.MainImageAltText = "A delicate mix of roses.";
                 pinkExpression.ProductDescription = "A delicate mix of roses, lilies and carnations in various shades of pink.";
-                pinkExpression.UnitPrice = 40.00d;
+                pinkExpression.UnitPrice = 40.00m;
                 pinkExpression.Rating = 4; // Raiting will eventually come from a query on user reviews for each product. Raitings will be updated once per day.
 
                 _context.Products.Add(pinkExpression);
@@ -100,7 +100,7 @@ namespace BrighterDayBouquet.Models
                 redBloom.MainImage = "images/redbloom.jpg";
                 redBloom.MainImageAltText = "Two dozen red roses.";
                 redBloom.ProductDescription = "Two dozen brilliant, sweet scented red roses to brighten your day.";
-                redBloom.UnitPrice = 45.00d;
+                redBloom.UnitPrice = 45.00m;
                 redBloom.Rating = 5;
 
                 _context.Products.Add(redBloom);
@@ -112,7 +112,7 @@ namespace BrighterDayBouquet.Models
                 multiColor.MainImage = "images/multicolor.jpg";
                 multiColor.MainImageAltText = "Two dozen multi-colored roses.";
                 multiColor.ProductDescription = "Two dozen bright multi-colored roses. Shades of red green and blue fused together to provide an unimaginable beauty.";
-                multiColor.UnitPrice = 65.00d;
+                multiColor.UnitPrice = 65.00m;
                 multiColor.Rating = 5;
 
                 _context.Products.Add(multiColor);
@@ -124,7 +124,7 @@ namespace BrighterDayBouquet.Models
                 smile.MainImage = "images/sendingsmiles.jpg";
                 smile.MainImageAltText = "Friendly colors mix.";
                 smile.ProductDescription = "Friendly colors, bursting with happieness. A brilliant bouquet in a cute mug that is sure to make someone smile!";
-                smile.UnitPrice = 45.00d;
+                smile.UnitPrice = 45.00m;
                 smile.Rating = 4;
 
                 _context.Products.Add(smile);

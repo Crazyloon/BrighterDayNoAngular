@@ -1,12 +1,18 @@
-﻿<div style="display: flex; justify-content:center;  width: 88%; background-color: #cbacba;">
-    <div class="text-danger" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
-    <wait-cursor display-when="vm.isBusy"></wait-cursor>
-    
-    <div style="width: 200px; height: 200px; margin:10px;" ng-repeat="product in vm.products">
-        <img src="{{product.mainImage}}" alt="{{product.maimImageAltText}}" style="width: 100px; height:100px;" />
-        <br />
-        <span>{{product.productName}}</span>
-        <p>{{product.productDescription | limitTo:descriptionLimit}}</p>
+﻿<!--Wait Cursor-->
+<div class="text-danger pt-3" ng-show="vm.errorMessage">{{vm.errorMessage}}</div> 
+<div class="pt-3"><wait-cursor display-when="vm.isBusy"></wait-cursor></div>
+<!--Wait Cursor-->
+<!-- Flexible Product Containers-->
+<div class="d-flex justify-content-around align-content-stretch flex-wrap mt-2">
+    <div class="d-block m-2 p-2 item-shadow" ng-repeat="product in vm.products" style="max-width:340px; ">
+        <h2 class="text-center">{{product.productName}}</h2>
+        <img class="img-thumbnail product-img-thumb mx-auto d-block" src="{{product.mainImage}}" alt="{{product.maimImageAltText}}" />
+        <p class="text-center">{{product.unitPrice | currency}}</p>
+        <p class="card-text text-center card-text-height-norm">{{product.productDescription | limitTo:vm.descriptionLimit}}{{product.productDescription.length > vm.descriptionLimit ? '&hellip;' : ''}}</p>
+        <p class="text-center mt-auto">
+            <a class="btn btn-success mt-sm-2" href="#" role="button">Add To Cart <i class="fa fa-shopping-cart"></i></a>
+            <a class="btn btn-outline-primary mt-sm-2" href="#" role="button">Details &raquo;</a>
+        </p>
     </div>
-    
 </div>
+<!-- Flexible Product Containers -->

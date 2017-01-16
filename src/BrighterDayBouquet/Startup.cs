@@ -85,6 +85,7 @@ namespace BrighterDayBouquet
             services.AddTransient<BrighterDaySeedData>();
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped(typeof(ProductRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

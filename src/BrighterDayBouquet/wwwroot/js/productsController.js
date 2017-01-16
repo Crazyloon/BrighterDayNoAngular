@@ -10,11 +10,15 @@
     function productsController($http) {
         var vm = this; // ViewModel - 'this' is the object that is returned from the controller
 
-        vm.descriptionLimit = 50;
-
-        vm.products = []
+        // Globals (aka useful for multiple functions in this file [not actually 'global'])
         vm.errorMessage = "";
         vm.isBusy = true;
+
+        /*Get a list of products for browsing*/
+        // browse product-card description text limit...
+        vm.descriptionLimit = 120;
+        // products list container
+        vm.products = []
 
         // Call to the API to get a list of products
         $http.get("/api/products")
