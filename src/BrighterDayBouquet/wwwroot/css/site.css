@@ -74,6 +74,7 @@ textarea {
 
 /*Applies before this breakpoint is reached (screen smaller than 480 px)*/
 @media only screen and (max-width: 480px) {
+    /*product-details-*/
     .p-d-wrap {
         flex-wrap: wrap;
         justify-content: center;
@@ -88,6 +89,7 @@ textarea {
 
 /*Applies after this breakpoint is reached*/
 @media only screen and (min-width: 480px) {
+    /*product-details-*/
     .p-d-wrap {
         flex-wrap: nowrap;
         justify-content: space-between;
