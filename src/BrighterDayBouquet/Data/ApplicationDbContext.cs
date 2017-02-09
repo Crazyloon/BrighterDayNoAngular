@@ -22,6 +22,7 @@ namespace BrighterDayBouquet.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             builder.Entity<Review>().HasKey(k => new { k.UserID, k.ProductID });
+            builder.Entity<CartItem>().HasKey(k => new { k.CartID, k.ProductID, k.PackageStyleID });
         }
 
         // DbSets for each table in the database

@@ -17,5 +17,10 @@ namespace BrighterDayBouquet.Data.Repositories
         {
             return currentContext.ShoppingCarts.SingleOrDefault(sC => sC.Id == id);
         }
+
+        public virtual ShoppingCart GetByUserID(string userID)
+        {
+            return currentContext.ShoppingCarts.SingleOrDefault(sC => sC.UserID == userID);
+        }
     }
 }

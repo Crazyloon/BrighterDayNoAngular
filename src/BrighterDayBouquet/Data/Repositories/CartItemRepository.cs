@@ -17,9 +17,30 @@ namespace BrighterDayBouquet.Data.Repositories
         {
         }
 
+        // allow adding new cart items if one does not already exist
+        // else update the quantity of the existing cart item.
+        public override void Add(CartItem entity)
+        {
+            CartItem existingCartItem = this.GetByIds(entity.CartID, entity.ProductID, entity.PackageStyleID);
+            if (existingCartItem == null)
+            {
+                base.Add(entity);
+            }
+            else
+            {
+                existingCartItem.Quantity += 1;
+                this.Update(existingCartItem);
+            }            
+        }
+
         public override CartItem GetById(int id)
         {
-            return currentContext.CartItems.SingleOrDefault(cItms => cItms.Id == id);
+            throw new InvalidOperationException("Unable to retrieve cart item by just an id. Must include cartID, productID, and packageStyleID");
+        }
+
+        public CartItem GetByIds(int cartId, int productId, int packageStyleId)
+        {
+            return currentContext.CartItems.SingleOrDefault(ci => ci.CartID == cartId && ci.ProductID == productId && ci.PackageStyleID == packageStyleId);
         }
     }
 }

@@ -4,7 +4,7 @@
     "use strict";
 
     // get existing module (an object to add our controller to)
-    angular.module("app-productDetails")
+    angular.module("app-products")
         .controller("productDetailsController", productDetailsController);
 
     function productDetailsController($routeParams, $http) {
@@ -19,7 +19,7 @@
         // browse product-card description text limit...
         vm.descriptionLimit = 120;
 
-        // single product item
+        // single product object
         vm.product = {}
         
         let productUrl = "/api/products/" + vm.productCode;
@@ -31,7 +31,7 @@
             angular.copy(response.data, vm.product);
         }, function (error) {
             //fail
-            vm.errorMessage = "That product could not be found " + error;
+            vm.errorMessage = "That product could not be found. " + error;
         })
         .finally(function () {
             vm.isBusy = false;

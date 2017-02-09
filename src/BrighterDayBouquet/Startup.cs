@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using BrighterDayBouquet.Data.Contracts;
 using BrighterDayBouquet.Data.Repositories;
 using AutoMapper;
-using BrighterDayBouquet.ViewModels.Api;
+using BrighterDayBouquet.ViewModels.Web;
 
 namespace BrighterDayBouquet
 {
@@ -86,6 +86,8 @@ namespace BrighterDayBouquet
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped(typeof(ProductRepository));
+            services.AddScoped(typeof(CartItemRepository));
+            services.AddScoped(typeof(ShoppingCartRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,6 +99,7 @@ namespace BrighterDayBouquet
                 // In addition, CreateMap automatically two-way maps for collections
                 // IEnumerable<ProductViewModel <-> IEnumerable<Product>
                 config.CreateMap<ProductViewModel, Product>().ReverseMap();
+                config.CreateMap<ProductDetailsViewModel, Product>().ReverseMap();
             });
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

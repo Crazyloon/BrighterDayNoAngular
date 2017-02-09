@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BrighterDayBouquet.Data;
 
-namespace BrighterDayBouquet.Data.Migrations
+namespace BrighterDayBouquet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170115022513_ProductModelChanged")]
-    partial class ProductModelChanged
+    [Migration("20170118221746_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,7 +175,7 @@ namespace BrighterDayBouquet.Data.Migrations
 
                     b.Property<byte?>("Rating");
 
-                    b.Property<double>("UnitPrice");
+                    b.Property<decimal>("UnitPrice");
 
                     b.HasKey("Id");
 

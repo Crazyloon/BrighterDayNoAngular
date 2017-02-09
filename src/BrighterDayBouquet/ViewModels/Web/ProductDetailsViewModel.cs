@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BrighterDayBouquet.ViewModels.Api
+namespace BrighterDayBouquet.ViewModels.Web
 {
-    public class ProductViewModel
+    public class ProductDetailsViewModel
     {
         [Required]
         public int CategoryID { get; set; }
@@ -19,7 +19,7 @@ namespace BrighterDayBouquet.ViewModels.Api
         [Required]
         [StringLength(128)]
         public string ProductName { get; set; }
-
+        
         [Required]
         [StringLength(256)]
         public string ProductDescription { get; set; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BrighterDayBouquet.Data.Repositories;
 using BrighterDayBouquet.Models;
-using BrighterDayBouquet.ViewModels.Api;
+using BrighterDayBouquet.ViewModels.Web;
 using BrighterDayBouquet.Data.Contracts;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
@@ -13,13 +13,13 @@ using Microsoft.Extensions.Logging;
 namespace BrighterDayBouquet.Controllers.Api
 {
     [Route("api/products")]
-    public class ProductsController : Controller
+    public class ProductsAPIController : Controller
     {
-        private ILogger<ProductsController> _logger;
+        private ILogger<ProductsAPIController> _logger;
         //private IRepository<Product> _productsRepo; IRepository<Product> productsRepo
         private ProductRepository _productsRepo;
 
-        public ProductsController(ProductRepository productsRepo, ILogger<ProductsController> logger)
+        public ProductsAPIController(ProductRepository productsRepo, ILogger<ProductsAPIController> logger)
         {
             _productsRepo = productsRepo;
             _logger = logger;
@@ -31,7 +31,7 @@ namespace BrighterDayBouquet.Controllers.Api
             try
             {
                 var products = _productsRepo.GetAll().OrderByDescending(p => p.Rating);
-                return Ok(Mapper.Map<IEnumerable<ProductViewModel>>(products));
+                return Ok(Mapper.Map<IEnumerable<ProductDetailsViewModel>>(products));
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace BrighterDayBouquet.Controllers.Api
             try
             {
                 var product = _productsRepo.GetByProductCode(productCode);
-                return Ok(Mapper.Map<ProductViewModel>(product));
+                return Ok(Mapper.Map<ProductDetailsViewModel>(product));
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace BrighterDayBouquet.Controllers.Api
 
         [HttpPost("")]
         // FromBody -> modelbind the data from body to the model
-        public IActionResult Post([FromBody]ProductViewModel product)
+        public IActionResult Post([FromBody]ProductDetailsViewModel product)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace BrighterDayBouquet.Controllers.Api
                 // Protect Post so only store owners can access it
                 // Actually add products to the database.
                 var newProduct = Mapper.Map<Product>(product);
-                return Created($"api/products/{product.ProductCode}", Mapper.Map<ProductViewModel>(newProduct));
+                return Created($"api/products/{product.ProductCode}", Mapper.Map<ProductDetailsViewModel>(newProduct));
             }
 
             return BadRequest("Bad Data");

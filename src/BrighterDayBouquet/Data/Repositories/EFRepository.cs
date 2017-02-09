@@ -28,7 +28,7 @@ namespace BrighterDayBouquet.Data.Repositories
         }
 
         // Implemented methods
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             _context.Set<T>().Add(entity);
         }
@@ -48,7 +48,12 @@ namespace BrighterDayBouquet.Data.Repositories
             _context.Set<T>().Update(entity);
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
+        }
+
         // Abstract method left to implement
-        public abstract T GetById(int id);
+        public abstract T GetById(int id);        
     }
 }

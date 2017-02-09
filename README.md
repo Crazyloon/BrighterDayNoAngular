@@ -1,6 +1,9 @@
 # BrighterDayBouquet
 This is an e-commerce website for selling flowers to local customers (no delivery options planned for release)
 
+I plan to build this site for fun and to gain some experience using new technologies.
+After I complete this version of the site, I will recreate it using AngularJS (possibly Angular2 - we'll see!)
+
 ## Technologies Used:
 ### Backend:
   * ASP.NET Core 1.0.0 - Including:
@@ -9,7 +12,6 @@ This is an e-commerce website for selling flowers to local customers (no deliver
     * Entity Framework Core for SQL Server
     
 ### Frontend:
-  * Angular 1.x
   * Bootstrap 4.0.0-alpha.6
   * JQuery 3.x
     * JQuery-Validation

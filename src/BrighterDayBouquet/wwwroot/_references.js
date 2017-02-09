@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/app-products.js" />
 /// <reference path="js/productdetailscontroller.js" />
+/// <reference path="js/products.js" />
 /// <reference path="js/productscontroller.js" />
 /// <reference path="js/simplecontrols.js" />
 /// <reference path="js/site.js" />

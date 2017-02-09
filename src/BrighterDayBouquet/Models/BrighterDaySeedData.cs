@@ -182,7 +182,7 @@ namespace BrighterDayBouquet.Models
                 CartItem ci = new CartItem();
                 ci.CartID = 1;
                 ci.PackageStyleID = 1;
-                ci.ProductID = 5;
+                ci.ProductID = 1;
                 ci.Quantity = 2;
                 ci.isCheckedOut = false;
 
@@ -191,7 +191,7 @@ namespace BrighterDayBouquet.Models
                 CartItem ci2 = new CartItem();
                 ci2.CartID = 1;
                 ci2.PackageStyleID = 2;
-                ci2.ProductID = 5;
+                ci2.ProductID = 1;
                 ci2.Quantity = 2;
                 ci2.isCheckedOut = false;
 

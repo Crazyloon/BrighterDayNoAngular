@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-around align-content-stretch flex-wrap mt-2">
     <div class="d-block m-2 p-2 item-shadow" style="max-width:340px; ">
         <h2 class="text-center">{{vm.product.productName}}</h2>
-        <img class="img-thumbnail product-img-thumb mx-auto d-block" src="{{vm.product.mainImage}}" alt="{{vm.product.mainImageAltText}}" />
+        <img class="img-thumbnail product-img-thumb mx-auto d-block" ng-src="{{vm.product.mainImage}}" alt="{{vm.product.mainImageAltText}}" />
         <p class="text-center">{{vm.product.unitPrice | currency}}</p>
         <p class="card-text text-center card-text-height-norm">{{vm.product.productDescription | limitTo:vm.descriptionLimit}}{{vm.product.productDescription.length > vm.descriptionLimit ? '&hellip;' : ''}}</p>
         <p class="text-center mt-auto">

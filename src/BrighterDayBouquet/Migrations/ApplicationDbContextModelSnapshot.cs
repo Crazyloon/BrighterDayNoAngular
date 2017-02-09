@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BrighterDayBouquet.Data;
 
-namespace BrighterDayBouquet.Data.Migrations
+namespace BrighterDayBouquet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170108000103_Product_Code")]
-    partial class Product_Code
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -72,20 +71,17 @@ namespace BrighterDayBouquet.Data.Migrations
 
             modelBuilder.Entity("BrighterDayBouquet.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("CartID");
 
-                    b.Property<int>("PackageStyleID");
-
                     b.Property<int>("ProductID");
+
+                    b.Property<int>("PackageStyleID");
 
                     b.Property<int>("Quantity");
 
                     b.Property<bool>("isCheckedOut");
 
-                    b.HasKey("Id");
+                    b.HasKey("CartID", "ProductID", "PackageStyleID");
 
                     b.HasIndex("CartID");
 
@@ -152,12 +148,18 @@ namespace BrighterDayBouquet.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CategoryID");
+
                     b.Property<string>("MainImage")
                         .IsRequired();
 
+                    b.Property<string>("MainImageAltText")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 64);
+
                     b.Property<string>("ProductCode")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 8);
+                        .HasAnnotation("MaxLength", 10);
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -167,13 +169,29 @@ namespace BrighterDayBouquet.Data.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 128);
 
-                    b.Property<byte>("Rating");
+                    b.Property<byte?>("Rating");
 
-                    b.Property<double>("UnitPrice");
+                    b.Property<decimal>("UnitPrice");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BrighterDayBouquet.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 32);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("BrighterDayBouquet.Models.ProductImage", b =>
@@ -391,10 +409,18 @@ namespace BrighterDayBouquet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("BrighterDayBouquet.Models.Product", b =>
+                {
+                    b.HasOne("BrighterDayBouquet.Models.ProductCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("BrighterDayBouquet.Models.ProductImage", b =>
                 {
                     b.HasOne("BrighterDayBouquet.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Images")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

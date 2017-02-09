@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BrighterDayBouquet.Data;
 
-namespace BrighterDayBouquet.Data.Migrations
+namespace BrighterDayBouquet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170116003821_ProductModelChangedAgain")]
-    partial class ProductModelChangedAgain
+    [Migration("20170119045027_ChangedCartItem")]
+    partial class ChangedCartItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,20 +72,17 @@ namespace BrighterDayBouquet.Data.Migrations
 
             modelBuilder.Entity("BrighterDayBouquet.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("CartID");
 
-                    b.Property<int>("PackageStyleID");
-
                     b.Property<int>("ProductID");
+
+                    b.Property<int>("PackageStyleID");
 
                     b.Property<int>("Quantity");
 
                     b.Property<bool>("isCheckedOut");
 
-                    b.HasKey("Id");
+                    b.HasKey("CartID", "ProductID", "PackageStyleID");
 
                     b.HasIndex("CartID");
 

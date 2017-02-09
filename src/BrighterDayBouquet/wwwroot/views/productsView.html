@@ -6,12 +6,12 @@
 <div class="d-flex justify-content-around align-content-stretch flex-wrap mt-2">
     <div class="d-block m-2 p-2 item-shadow" ng-repeat="product in vm.products" style="max-width:340px; ">
         <h2 class="text-center">{{product.productName}}</h2>
-        <img class="img-thumbnail product-img-thumb mx-auto d-block" src="{{product.mainImage}}" alt="{{product.maimImageAltText}}" />
+        <img class="img-thumbnail product-img-thumb mx-auto d-block" ng-src="{{product.mainImage}}" alt="{{product.maimImageAltText}}" />
         <p class="text-center">{{product.unitPrice | currency}}</p>
         <p class="card-text text-center card-text-height-norm">{{product.productDescription | limitTo:vm.descriptionLimit}}{{product.productDescription.length > vm.descriptionLimit ? '&hellip;' : ''}}</p>
         <p class="text-center mt-auto">
-            <a class="btn btn-success mt-sm-2" href="#" role="button">Add To Cart <i class="fa fa-shopping-cart"></i></a>
-            <a class="btn btn-outline-primary mt-sm-2" href="#" role="button">Details &raquo;</a>
+            <button class="btn btn-success mt-sm-2" ng-click="AddToCart()" role="button">Add To Cart <i class="fa fa-shopping-cart"></i></button>
+            <a class="btn btn-outline-primary mt-sm-2" href="/products/details#!/{{product.productCode}}" role="button">Details &raquo;</a>
         </p>
     </div>
 </div>

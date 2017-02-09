@@ -19,18 +19,15 @@ namespace BrighterDayBouquet.Models
     /// </remarks>
     public class CartItem
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
+        [Key, Column(Order = 0)]
         [ForeignKey("ShoppingCart")]
         public int CartID { get; set; }
 
-        [Required]
+        [Key, Column(Order = 1)]
         [ForeignKey("Product")]
         public int ProductID { get; set; }
 
-        [Required]
+        [Key, Column(Order = 2)]
         [ForeignKey("PackageStyle")]
         public int PackageStyleID { get; set; }
 

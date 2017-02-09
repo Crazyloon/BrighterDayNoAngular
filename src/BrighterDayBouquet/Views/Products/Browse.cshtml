@@ -1,4 +1,4 @@
-@model BrighterDayBouquet.ViewModels.Api.ProductViewModel
+@model IEnumerable<BrighterDayBouquet.ViewModels.Web.ProductViewModel>
 
 @{
     ViewData["Title"] = "Browse Products";
@@ -6,17 +6,30 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/lib/angular/angular.min.js"></script>
-    <script src="~/lib/angular-route/angular-route.min.js"></script>
-    <script src="~/js/simpleControls.js"></script>
-    <script src="~/js/app-products.js"></script>
-    <script src="~/js/productsController.js"></script>
 }
 
 
 
-<div class="row" ng-app="app-products">
-
-    <div ng-view></div>
+<div class="row">
+    <!-- Flexible Product Containers-->
+    <div class="d-flex justify-content-around align-content-stretch flex-wrap mt-2">
+        @foreach (var product in Model)
+        {
+            <div class="d-block m-2 p-2 item-shadow" style="max-width:340px; ">
+                <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                    <input type="hidden" value="@product.ProductCode" name="productCode" />
+                    <h2 class="text-center">@product.ProductName</h2>
+                    <img class="img-thumbnail product-img-thumb mx-auto d-block" src="@product.MainImage" alt="@product.MainImageAltText" />
+                    <p class="text-center">@product.UnitPrice.ToString("C")</p>
+                    <p class="card-text text-center card-text-height-norm">@product.ProductDescription</p>
+                    <p class="text-center mt-auto">
+                        <button class="btn btn-success mt-sm-2" type="submit">Add To Cart <i class="fa fa-shopping-cart"></i></button>
+                        <a class="btn btn-outline-primary mt-sm-2" asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductCode" role="button">Details &raquo;</a>
+                    </p>
+                </form>
+            </div>
+        }        
+    </div>
+    <!-- Flexible Product Containers -->
 
 </div>
